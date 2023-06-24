@@ -20,6 +20,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 5rem;
 }
 
 /* LAYOUT */
@@ -179,4 +180,123 @@ main {
 }
 .disable {
   pointer-events: none;
+}
+
+@media (max-width: 846px) {
+  main {
+    flex-direction: column;
+    width: 60rem;
+    height: 90vh;
+    overflow: visible;
+  }
+
+  .player {
+    height: 50%;
+  }
+
+  .name {
+    font-size: 3rem;
+    margin-top: -3rem;
+  }
+
+  .score {
+    font-size: 5rem;
+  }
+  
+  .current {
+    width: 50%;
+    height: 34%;
+    flex-grow: 1;
+  }
+
+  .current-label, .current-score {
+    margin-top: -1rem;
+    font-size: 1.8rem;
+  }
+
+  .dice {
+    height: 8rem;
+    top: 45%;
+  }
+
+  .btn {
+    top: 47%;
+    padding-bottom: 45px;
+    width: 35%;
+    max-height: 4%;
+    font-size: 1.4rem;
+  }
+
+  .btn--new {
+    width: 40%;
+    top: -3%;
+  }
+  .btn--roll {
+    left: 20%;
+  }
+  .btn--hold {
+    left: 80%;
+  }
+
+}
+
+@media (max-width: 553px) {
+  .current {
+    width: 70%;
+  }
+
+  .btn {
+    width: 36%;
+    font-size: 1.2rem;
+  }
+
+  .btn--new {
+    width: 40%;
+  }
+}
+
+@media (max-width: 511px) {
+  .current {
+    width: 90%;
+    height: 30%;
+  }
+
+  .current-label, .current-score {
+    font-size: 1.5rem;
+  }
+
+  .btn{
+    width: 25%;
+    text-align: center;
+  }
+
+  .btn span{
+    display: none;
+  }
+}
+
+@media (max-width: 428px) {
+  .name {
+    font-size: 2.5rem;
+    margin-top: -3rem;
+  }
+
+  .score {
+    font-size: 4.5rem;
+  }
+
+  .btn {
+    padding-right: 5.5rem;
+  }
+}
+
+@media (max-width: 405px) {
+  .name {
+    font-size: 2.2rem;
+    margin-top: -3rem;
+  }
+
+  .score {
+    font-size: 4.3rem;
+  }
 }
