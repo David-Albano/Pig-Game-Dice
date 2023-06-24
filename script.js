@@ -13,13 +13,32 @@ let diceNumber = 1
 let currentPlayer = allPlayers[turn]
 let gameOver = false
 
-const rollDice = function() {
-    scorePlayer = document.getElementById(`score--${turn}`) 
+const rollDice = async function() {
+    const diceFaces = ['dice-1.png', 'dice-2.png', 'dice-3.png', 'dice-4.png', 'dice-5.png', 'dice-6.png']
+    let counter = 0
+    let diceInterval;
+
+    function animateDice() {
+        const randomIndex = Math.floor(Math.random() * diceFaces.length)
+
+        const diceFace = diceFaces[randomIndex]
+        diceImage.src = diceFace
+
+        counter++
+
+        if (counter === 20) {
+            clearInterval(diceInterval)
+            diceImage.src = `dice-${diceNumber}.png`
+            return
+        }
+    }
+
+    scorePlayer = document.getElementById(`score--${turn}`)
     currentPlayerValue = document.getElementById(`current--${turn}`)
 
     diceNumber = Math.trunc(Math.random() * (6)) + 1
     diceImage.classList.remove('hidden')
-    diceImage.src = `dice-${diceNumber}.png`
+    diceInterval = setInterval(animateDice, 40)
 
     if(diceNumber === 1){
         changeTurn()
