@@ -1,2 +1,92 @@
 'use strict';
+const goalPoints = 10
+const diceImage = document.querySelector('img')
+const btnRollDice = document.querySelector('.btn--roll')
+const btnHold = document.querySelector('.btn--hold')
+const btnNewGame = document.querySelector('.btn--new')
+const allPlayers = document.querySelectorAll('.player')
+let turn = 0
+let scorePlayer = null
+let currentPlayerValue = null
+let currentValueBank = 0
+let diceNumber = 1
+let currentPlayer = allPlayers[turn]
+let gameOver = false
 
+const rollDice = function() {
+    scorePlayer = document.getElementById(`score--${turn}`) 
+    currentPlayerValue = document.getElementById(`current--${turn}`)
+
+    diceNumber = Math.trunc(Math.random() * (6)) + 1
+    diceImage.classList.remove('hidden')
+    diceImage.src = `dice-${diceNumber}.png`
+
+    if(diceNumber === 1){
+        changeTurn()
+    } else {
+        currentValueBank += diceNumber
+        currentPlayerValue.textContent = currentValueBank
+
+        let goalReached = Number(scorePlayer.textContent) + Number(currentPlayerValue.textContent)
+        if(goalReached >= goalPoints){
+            scorePlayer.textContent = goalReached
+            currentPlayer.classList.toggle('player--winner')
+            document.querySelector(`.winner--${turn}`).classList.toggle('hidden')
+
+            btnRollDice.classList.toggle('disable')
+            btnHold.classList.toggle('disable')
+            gameOver = true
+        }
+    }
+}
+
+const changeTurn = function() {
+    if (scorePlayer === null || currentPlayerValue === null) return
+
+    if(diceNumber !== 1) scorePlayer.textContent = Number(scorePlayer.textContent) + currentValueBank
+    currentPlayerValue.textContent = currentValueBank = 0
+
+    if(currentPlayer.classList.contains('player--active')) currentPlayer.classList.remove('player--active')
+    turn === 0 ? turn = 1 : turn = 0
+    currentPlayer = allPlayers[turn]
+
+    if(!currentPlayer.classList.contains('player--active')) currentPlayer.classList.add('player--active')
+}
+
+btnRollDice.addEventListener('click', rollDice)
+btnHold.addEventListener('click', changeTurn)
+
+btnNewGame.addEventListener('click', function() {
+    diceImage.classList.add('hidden')
+
+    for(let i = 0; i < allPlayers.length; i++) {
+        document.getElementById(`score--${i}`).textContent = 0
+        document.getElementById(`current--${i}`).textContent = 0
+
+        if(gameOver) {
+            if(allPlayers[i].classList.contains('player--winner')) {
+                allPlayers[i].classList.remove('player--winner')
+            }
+        
+            if(!document.querySelector(`.winner--${i}`).classList.contains('hidden'))
+            document.querySelector(`.winner--${i}`).classList.add('hidden')
+
+            
+            btnRollDice.classList.remove('disable')
+            btnHold.classList.remove('disable')
+        }
+    }
+
+    if(turn !== 0) {
+        allPlayers[turn].classList.remove('player--active')
+        allPlayers[0].classList.add('player--active')
+    }
+
+    scorePlayer = null
+    currentPlayerValue = null
+    currentValueBank = 0
+    turn = 0
+    diceNumber = 1
+    currentPlayer = allPlayers[turn]
+    gameOver = false
+})
