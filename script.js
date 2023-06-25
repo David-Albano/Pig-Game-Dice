@@ -122,16 +122,12 @@ themeChange.addEventListener('click', function() {
         squareColor[0].style.color = '#c7365f'
         squareColor[1].style.color = '#c7365f'
         current[0].style.backgroundColor = '#c7365f'
-        current[0].style.color = currentLabel[0].style.color = '#fff'
         current[1].style.backgroundColor = '#c7365f'
-        current[1].style.color = currentLabel[1].style.color = '#fff'
     } else {
         body.style.backgroundImage = 'linear-gradient(to top left, #020f4d 0%, #5e84ff 100%)'
         squareColor[0].style.color = '#51c0f3'
         squareColor[1].style.color = '#51c0f3'
         current[0].style.backgroundColor = '#51c0f3'
-        current[0].style.color = currentLabel[0].style.color = '#000'
         current[1].style.backgroundColor = '#51c0f3'
-        current[1].style.color = currentLabel[1].style.color = '#000'
     }
 })
