@@ -1,5 +1,5 @@
 'use strict';
-const goalPoints = 10
+const goalPoints = 70
 const diceImage = document.querySelector('img')
 const btnRollDice = document.querySelector('.btn--roll')
 const btnHold = document.querySelector('.btn--hold')
