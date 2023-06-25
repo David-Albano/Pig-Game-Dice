@@ -5,6 +5,7 @@ const btnRollDice = document.querySelector('.btn--roll')
 const btnHold = document.querySelector('.btn--hold')
 const btnNewGame = document.querySelector('.btn--new')
 const allPlayers = document.querySelectorAll('.player')
+const themeChange = document.getElementById('theme')
 let turn = 0
 let scorePlayer = null
 let currentPlayerValue = null
@@ -86,11 +87,11 @@ btnNewGame.addEventListener('click', function() {
             if(allPlayers[i].classList.contains('player--winner')) {
                 allPlayers[i].classList.remove('player--winner')
             }
-        
+
             if(!document.querySelector(`.winner--${i}`).classList.contains('hidden'))
             document.querySelector(`.winner--${i}`).classList.add('hidden')
 
-            
+
             btnRollDice.classList.remove('disable')
             btnHold.classList.remove('disable')
         }
@@ -108,4 +109,29 @@ btnNewGame.addEventListener('click', function() {
     diceNumber = 1
     currentPlayer = allPlayers[turn]
     gameOver = false
+})
+
+themeChange.addEventListener('click', function() {
+    const body = document.querySelector('body')
+    const squareColor = document.querySelectorAll('.score')
+    const current = document.querySelectorAll('.current')
+    const currentLabel = document.querySelectorAll('.current-label')
+
+    if (themeChange.checked) {
+        body.style.backgroundImage = 'linear-gradient(to top left, #753682 0%, #bf2e34 100%)'
+        squareColor[0].style.color = '#c7365f'
+        squareColor[1].style.color = '#c7365f'
+        current[0].style.backgroundColor = '#c7365f'
+        current[0].style.color = currentLabel[0].style.color = '#fff'
+        current[1].style.backgroundColor = '#c7365f'
+        current[1].style.color = currentLabel[1].style.color = '#fff'
+    } else {
+        body.style.backgroundImage = 'linear-gradient(to top left, #020f4d 0%, #5e84ff 100%)'
+        squareColor[0].style.color = '#51c0f3'
+        squareColor[1].style.color = '#51c0f3'
+        current[0].style.backgroundColor = '#51c0f3'
+        current[0].style.color = currentLabel[0].style.color = '#000'
+        current[1].style.backgroundColor = '#51c0f3'
+        current[1].style.color = currentLabel[1].style.color = '#000'
+    }
 })
